@@ -1,0 +1,10 @@
+[global]
+port = 8000
+
+[development]
+address = "localhost"
+log = "normal"
+
+[production]
+address = "0.0.0.0"
+log = "normal"

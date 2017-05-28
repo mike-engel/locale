@@ -4,15 +4,24 @@
 extern crate rocket;
 extern crate accept_language;
 extern crate serde_json;
-#[macro_use] extern crate rocket_contrib;
+extern crate serde;
+#[macro_use]
+extern crate serde_derive;
+#[macro_use]
+extern crate rocket_contrib;
 
-use rocket::request::{self, Request, FromRequest};
+use rocket::request::{self, FromRequest, Request};
 use rocket::outcome::Outcome::*;
-use rocket_contrib::{JSON, Value};
+use rocket_contrib::{JSON, Template, Value};
 use accept_language::parse;
 
 struct AcceptLanguage {
     user_languages: Vec<String>,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+struct IndexContext {
+    language: String,
 }
 
 impl<'a, 'r> FromRequest<'a, 'r> for AcceptLanguage {
@@ -22,16 +31,29 @@ impl<'a, 'r> FromRequest<'a, 'r> for AcceptLanguage {
 
         match accept_language_header {
             Some(languages) => Success(AcceptLanguage { user_languages: parse(languages) }),
-            None => Success(AcceptLanguage { user_languages: vec![] })
+            None => Success(AcceptLanguage { user_languages: vec![] }),
         }
     }
 }
 
 #[get("/")]
-fn index(accept_language: AcceptLanguage) -> JSON<Value> {
+fn index(accept_language: AcceptLanguage) -> Template {
+    let context = IndexContext {
+        language: accept_language
+            .user_languages
+            .first()
+            .unwrap_or(&String::from("en"))
+            .to_owned(),
+    };
+
+    Template::render("index", &context)
+}
+
+#[get("/api")]
+fn api(accept_language: AcceptLanguage) -> JSON<Value> {
     JSON(json!(accept_language.user_languages))
 }
 
 fn main() {
-    rocket::ignite().mount("/", routes![index]).launch();
+    rocket::ignite().mount("/", routes![index, api]).launch();
 }

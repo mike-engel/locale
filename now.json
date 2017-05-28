@@ -1,0 +1,6 @@
+{
+  "name": "locale",
+  "alias": "locale.now.sh",
+  "type": "docker",
+  "public": true
+}
