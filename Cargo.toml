@@ -1,7 +1,7 @@
 [package]
 name = "locale"
 description = "A polyfill to understand your users' preferred languages"
-version = "1.0.0"
+version = "1.0.1"
 authors = ["Mike Engel <mike@mike-engel.com>"]
 
 [dependencies]
