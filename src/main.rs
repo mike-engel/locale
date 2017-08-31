@@ -3,8 +3,6 @@
 
 extern crate rocket;
 extern crate accept_language;
-extern crate serde_json;
-extern crate serde;
 #[macro_use]
 extern crate serde_derive;
 #[macro_use]
@@ -12,7 +10,7 @@ extern crate rocket_contrib;
 
 use rocket::request::{self, FromRequest, Request};
 use rocket::outcome::Outcome::*;
-use rocket_contrib::{JSON, Template, Value};
+use rocket_contrib::{Json, Template, Value};
 use accept_language::parse;
 
 struct AcceptLanguage {
@@ -50,10 +48,13 @@ fn index(accept_language: AcceptLanguage) -> Template {
 }
 
 #[get("/api")]
-fn api(accept_language: AcceptLanguage) -> JSON<Value> {
-    JSON(json!(accept_language.user_languages))
+fn api(accept_language: AcceptLanguage) -> Json<Value> {
+    Json(json!(accept_language.user_languages))
 }
 
 fn main() {
-    rocket::ignite().mount("/", routes![index, api]).launch();
+    rocket::ignite()
+        .mount("/", routes![index, api])
+        .attach(Template::fairing())
+        .launch();
 }

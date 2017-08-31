@@ -1,18 +1,18 @@
 [package]
 name = "locale"
 description = "A polyfill to understand your users' preferred languages"
-version = "1.0.1"
+version = "1.1.0"
 authors = ["Mike Engel <mike@mike-engel.com>"]
 
 [dependencies]
-rocket = "0.2.7"
-rocket_codegen = "0.2.7"
+rocket = "0.3"
+rocket_codegen = "0.3"
 futures = "0.1"
-accept-language = "1.0"
-serde = "0.9"
-serde_json = "0.9"
-serde_derive = "0.9"
+accept-language = "1.1"
+serde = "1.0"
+serde_json = "1.0"
+serde_derive = "1.0"
 
 [dependencies.rocket_contrib]
-version = "0.2.7"
+version = "0.3"
 features = ["handlebars_templates"]

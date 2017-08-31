@@ -1,4 +1,4 @@
-FROM scorpil/rust:nightly
+FROM rustlang/rust:nightly
 MAINTAINER Mike Engel <mike@mike-engel.com>
 
 ENV APP_DIR=/app/locale \
