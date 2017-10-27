@@ -1,12 +1,16 @@
+#![feature(const_atomic_bool_new)]
+#![feature(const_atomic_bool_new)]
+#![feature(const_unsafe_cell_new)]
+#![feature(const_atomic_usize_new)]
 #![feature(plugin)]
 #![plugin(rocket_codegen)]
 
-extern crate rocket;
 extern crate accept_language;
-#[macro_use]
-extern crate serde_derive;
+extern crate rocket;
 #[macro_use]
 extern crate rocket_contrib;
+#[macro_use]
+extern crate serde_derive;
 
 use rocket::request::{self, FromRequest, Request};
 use rocket::outcome::Outcome::*;
@@ -28,8 +32,12 @@ impl<'a, 'r> FromRequest<'a, 'r> for AcceptLanguage {
         let accept_language_header = request.headers().get_one("Accept-Language");
 
         match accept_language_header {
-            Some(languages) => Success(AcceptLanguage { user_languages: parse(languages) }),
-            None => Success(AcceptLanguage { user_languages: vec![] }),
+            Some(languages) => Success(AcceptLanguage {
+                user_languages: parse(languages),
+            }),
+            None => Success(AcceptLanguage {
+                user_languages: vec![],
+            }),
         }
     }
 }
