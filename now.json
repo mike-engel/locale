@@ -1,6 +1,10 @@
 {
   "name": "locale",
   "alias": "locale.now.sh",
-  "type": "docker",
+  "version": 2,
+  "builds": [
+    { "src": "index/Cargo.toml", "use": "@now/rust@canary", "config": { "newPipeline": true } },
+    { "src": "api/Cargo.toml", "use": "@now/rust@canary", "config": { "newPipeline": true } }
+  ],
   "public": true
 }
