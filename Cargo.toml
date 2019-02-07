@@ -4,3 +4,6 @@ members = [
   "index",
   "api"
 ]
+
+[patch.crates-io]
+now_lambda = { git = "https://github.com/mike-engel/now-builders" }

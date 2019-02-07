@@ -1,8 +1,8 @@
 use accept_language::parse;
 use http::StatusCode;
 use now_lambda::{error::NowError, lambda, IntoResponse, Request, Response};
-use std::error::Error;
 use serde_json::json;
+use std::error::Error;
 
 fn handler(request: Request) -> Result<impl IntoResponse, NowError> {
     let header = request.headers().get("Accept-Language");
@@ -13,7 +13,12 @@ fn handler(request: Request) -> Result<impl IntoResponse, NowError> {
     let response = Response::builder()
         .status(StatusCode::OK)
         .header("Content-Type", "application/json")
-        .body(json!(parsed_headers))
+        .body(
+            json!(parsed_headers)
+                .as_str()
+                .expect("Unable to stringify JSON")
+                .to_owned(),
+        )
         .expect("Internal Server Error");
 
     Ok(response)
