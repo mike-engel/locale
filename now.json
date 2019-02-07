@@ -3,5 +3,6 @@
   "alias": "locale.now.sh",
   "version": 2,
   "builds": [{ "src": "Cargo.toml", "use": "@now/rust@canary", "config": { "newPipeline": true } }],
+  "routes": [{ "src": "/", "dest": "index" }, { "src": "/api", "dest": "api" }],
   "public": true
 }
