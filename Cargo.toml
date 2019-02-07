@@ -24,8 +24,3 @@ edition = "2018"
 name = "api"
 path = "src/api.rs"
 edition = "2018"
-
-[[bin]]
-name = "test"
-path = "src/test.rs"
-edition = "2018"
