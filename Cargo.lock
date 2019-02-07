@@ -4,18 +4,6 @@ version = "1.2.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
-name = "api"
-version = "1.1.0"
-dependencies = [
- "accept-language 1.2.2 (registry+https://github.com/rust-lang/crates.io-index)",
- "http 0.1.15 (registry+https://github.com/rust-lang/crates.io-index)",
- "lambda_runtime 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "now_lambda 0.1.1 (git+https://github.com/mike-engel/now-builders)",
- "serde 1.0.87 (registry+https://github.com/rust-lang/crates.io-index)",
- "serde_json 1.0.38 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
 name = "arrayvec"
 version = "0.4.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -277,15 +265,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "index"
-version = "1.1.0"
-dependencies = [
- "http 0.1.15 (registry+https://github.com/rust-lang/crates.io-index)",
- "lambda_runtime 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "now_lambda 0.1.1 (git+https://github.com/mike-engel/now-builders)",
-]
-
-[[package]]
 name = "indexmap"
 version = "1.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -395,6 +374,18 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 name = "libc"
 version = "0.2.48"
 source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[[package]]
+name = "locale"
+version = "1.1.0"
+dependencies = [
+ "accept-language 1.2.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "http 0.1.15 (registry+https://github.com/rust-lang/crates.io-index)",
+ "lambda_runtime 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "now_lambda 0.1.1 (git+https://github.com/mike-engel/now-builders)",
+ "serde 1.0.87 (registry+https://github.com/rust-lang/crates.io-index)",
+ "serde_json 1.0.38 (registry+https://github.com/rust-lang/crates.io-index)",
+]
 
 [[package]]
 name = "lock_api"

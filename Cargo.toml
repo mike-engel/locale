@@ -1,9 +1,26 @@
-[workspace]
+[package]
+name = "locale"
+version = "1.1.0"
+authors = ["Mike Engel <mike@mike-engel.com>"]
+edition = "2018"
 
-members = [
-  "index",
-  "api"
-]
+[dependencies]
+http = "0.1"
+lambda_runtime = "0.2"
+now_lambda = "0.1"
+accept-language = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
 
 [patch.crates-io]
 now_lambda = { git = "https://github.com/mike-engel/now-builders" }
+
+[[bin]]
+name = "index"
+path = "src/index.rs"
+edition = "2018"
+
+[[bin]]
+name = "api"
+path = "src/api.rs"
+edition = "2018"
