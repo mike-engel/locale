@@ -5,11 +5,13 @@ use serde_json::json;
 use std::error::Error;
 
 fn handler(request: Request) -> Result<impl IntoResponse, NowError> {
+    println!("Starting API request");
     let header = request.headers().get("Accept-Language");
     let parsed_headers = match header {
         Some(language_header) => parse(language_header.to_str().unwrap_or("")),
         None => vec![],
     };
+    println!("Building API response");
     let response = Response::builder()
         .status(StatusCode::OK)
         .header("Content-Type", "application/json")
@@ -21,6 +23,7 @@ fn handler(request: Request) -> Result<impl IntoResponse, NowError> {
         )
         .expect("Internal Server Error");
 
+    println!("About to send API response");
     Ok(response)
 }
 
