@@ -1,18 +1,26 @@
 [package]
 name = "locale"
-description = "A polyfill to understand your users' preferred languages"
 version = "1.1.0"
 authors = ["Mike Engel <mike@mike-engel.com>"]
+edition = "2018"
 
 [dependencies]
-rocket = "0.3"
-rocket_codegen = "0.3"
-futures = "0.1"
-accept-language = "1.1"
-serde = "1.0"
-serde_json = "1.0"
-serde_derive = "1.0"
+http = "0.1"
+lambda_runtime = "0.2"
+now_lambda = "0.1"
+accept-language = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
 
-[dependencies.rocket_contrib]
-version = "0.3"
-features = ["handlebars_templates"]
+[patch.crates-io]
+now_lambda = { git = "https://github.com/mike-engel/now-builders" }
+
+[[bin]]
+name = "index"
+path = "src/index.rs"
+edition = "2018"
+
+[[bin]]
+name = "api"
+path = "src/api.rs"
+edition = "2018"
