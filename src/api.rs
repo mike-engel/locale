@@ -1,6 +1,5 @@
 use accept_language::parse;
-use http::StatusCode;
-use now_lambda::{error::NowError, lambda, IntoResponse, Request, Response};
+use now_lambda::{error::NowError, lambda, IntoResponse, Request};
 use serde_json::json;
 use std::error::Error;
 
@@ -10,13 +9,8 @@ fn handler(request: Request) -> Result<impl IntoResponse, NowError> {
         Some(language_header) => parse(language_header.to_str().unwrap_or("")),
         None => vec![],
     };
-    let response = Response::builder()
-        .status(StatusCode::OK)
-        .header("Content-Type", "application/json")
-        .body(format!("{}", json!(parsed_headers)))
-        .expect("Internal Server Error");
 
-    Ok(response)
+    Ok(json!(parsed_headers))
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
